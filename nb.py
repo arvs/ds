@@ -26,7 +26,7 @@ class NYTClassifier(object):
           strip_accents = 'unicode',
           ngram_range=(1,1),
           analyzer = 'word',
-          stop_words = stopwords,
+          stop_words = self.stopwords,
           binary=True
         )
     self.features = self.cv.fit_transform(bodies)
@@ -37,4 +37,3 @@ class NYTClassifier(object):
 
   def predict(self, text):
     return self.le.inverse_transform(self.clf.predict(self.cv.transform(text)))
-    
