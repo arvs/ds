@@ -25,7 +25,7 @@ mapper and reducer in wc_{mapper,reducer}.py, run on GCE w/ hadoop. Reducer outp
 	19. number of adjectives
 	20. number of list item markers
 * Features are calculated in features.py, written to extra_features_kaggle.json
-	 
+* Model submitted at Wed, 20 Nov 2013 19:14:03	 
 
 Question 2
 ------
@@ -47,8 +47,19 @@ Question 2
 
 *Most difficult to classify*
 
-I used the classfier to predict the log probabilities of each class for each document, and took the 10 with the lowest pairwise probability difference for being in their respective classes.
+I used the classfier to predict the log probabilities of each class for each document, and took the 10 with the lowest pairwise probability difference for being in their respective classes. In order: 
+
+* 'http://www.nytimes.com/2006/05/08/nyregion/08thering.html'
+* 'http://query.nytimes.com/gst/fullpage.html?res=9503E3D61E3BF935A1575BC0A9619C8B63'
+* 'http://query.nytimes.com/gst/fullpage.html?res=9F04E2DA103AF937A25751C1A9619C8B63'
+* 'http://query.nytimes.com/gst/fullpage.html?res=9C05E7DC1E3FF936A2575AC0A9619C8B63'
+* 'http://www.nytimes.com/2007/12/23/arts/television/23stan.html'
+* 'http://www.nytimes.com/2007/12/16/books/review/Diggins-t.html'
+* 'http://query.nytimes.com/gst/fullpage.html?res=9E0DE4D6113BF931A15753C1A9619C8B63'
+* 'http://query.nytimes.com/gst/fullpage.html?res=9400E1DB1339F932A35752C1A9619C8B63'
+* 'http://movies.nytimes.com/movie/review?res=9A00E2DA103AF937A25751C1A9619C8B63'
+* 'http://www.nytimes.com/2007/10/27/business/27lim1.html'
 
 *Discussion*
 
-I used the sklearn implementation of bernoulli naive bayes, and could not introspect or graph parameters. However, given that the only features we are considering are word counts, 
+I used the sklearn implementation of bernoulli naive bayes, and could not introspect or graph parameters. However, given that the only features we are considering are word counts, it is fair to assume that it is very section sensitive (with the significant words being more common in their respective sections) and less time sensitive, as changes in language / writing style happen over a longer period of time. I do think this classifier would be highly sensitive towards articles of the same subject from different publications, as each publication tends to have a particular writing style.
