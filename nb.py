@@ -2,6 +2,7 @@ import csv
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import BernoulliNB
 from sklearn.preprocessing import LabelEncoder
+from sklearn import cross_validation
 
 class NYTClassifier(object):
 
@@ -37,3 +38,6 @@ class NYTClassifier(object):
 
   def predict(self, text):
     return self.le.inverse_transform(self.clf.predict(self.cv.transform(text)))
+
+  def evaluate(self, text):
+    return cross_validation.cross_val_score(self.clf, self.features, self.labels, cv=2, scoring='f1')
