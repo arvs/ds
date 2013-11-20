@@ -1,4 +1,5 @@
 import csv
+from collections import OrderedDict
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import BernoulliNB
 from sklearn.preprocessing import LabelEncoder
@@ -14,7 +15,9 @@ class NYTClassifier(object):
       reader = csv.reader(f, delimiter = '\t')
       bodies = []
       labels = []
+      self.urls = []
       for url, title, body, section in reader:
+        self.urls.append(url)
         bodies.append(body)
         labels.append(section)
       self.le = LabelEncoder()
@@ -41,3 +44,9 @@ class NYTClassifier(object):
 
   def evaluate(self):
     return cross_validation.cross_val_score(self.clf, self.features, self.labels, cv=2, scoring='f1')
+
+  def hard_to_predict(self):
+    log_probs = self.clf.predict_log_proba(self.features)
+    min_prob_diffs = [min([abs(a-b) for a,b in itertools.combinations(x, 2)]) for x in log_probs]
+    joined = dict(zip(self.urls, min_prob_diffs))
+    return sorted(joined, key = joined.get)[:10]
