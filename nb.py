@@ -1,5 +1,5 @@
 import csv
-from collections import OrderedDict
+import itertools
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import BernoulliNB
 from sklearn.preprocessing import LabelEncoder
