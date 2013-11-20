@@ -39,5 +39,5 @@ class NYTClassifier(object):
   def predict(self, text):
     return self.le.inverse_transform(self.clf.predict(self.cv.transform(text)))
 
-  def evaluate(self, text):
+  def evaluate(self):
     return cross_validation.cross_val_score(self.clf, self.features, self.labels, cv=2, scoring='f1')
